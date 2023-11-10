@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#quotes {
+    margin-bottom: 20px;
+}
+
+.quote {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    margin: 5px 0;
+    padding: 10px;
+    display: block;
+    width: 200px;
+}
+
+button {
+    padding: 10px 20px;
+}
