@@ -7,7 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch('/api/quotes');
             const quotes = await response.json();
-            quotesList.innerHTML = quotes.map(quote => `<li>${quote.text} - ${quote.author} (${quote.date})</li>`).join('');
+            quotesList.innerHTML = quotes.map(quote => `
+            <li>${quote.text} - ${quote.author} (${quote.date}) 
+            <button class='delete-btn data-id='${quote.id}'>Delete</button>
+            </li>`).join('');
         } catch (error) {
             console.error('Failed to load quotes:', error);
         }
@@ -31,6 +34,24 @@ document.addEventListener('DOMContentLoaded', () => {
             form.reset(); // Reset the form fields
         } catch (error) {
             console.error('Failed to add quote:', error);
+        }
+    }
+    
+    );
+    const handleDelete = async (id)=>{
+        try {
+            await fetch(`/api/quotes/${id}`,{
+                method:'DELETE',
+            });
+            loadQuotes();
+        } catch (error) {
+            console.error('Failed to delete quote:', error);
+        }
+    }
+    quotesList.addEventListener('click', (event) => {
+        if (event.target.classList.contains('delete-btn')) {
+            const id = event.target.getAttribute('data-id');
+            handleDelete(id);
         }
     });
 
